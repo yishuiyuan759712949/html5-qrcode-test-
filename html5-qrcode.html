@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .readerWrap {
+            position: relative;
+            overflow: hidden;
+        }
+        .effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 75vw;
+            background: linear-gradient(to bottom, #fff 0%,#fff 5%, transparent 120%);;
+            animation-name: animate;
+            animation-duration: 2s;
+            animation-iteration-count:infinite;
+            animation-timing-function : linear;
+            opacity: .5;
+        }
+        @keyframes animate {
+            0% {
+                top: 0;
+                height: 75vw;
+            }
+            50% {
+                top: 75vw;
+                height: 0vw;
+            }
+            100% {
+                top: 0;
+                height: 75vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="readerWrap">
+        <div id="reader"></div>
+        <div class="effects"></div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.0.3/html5-qrcode.min.js'
+        integrity='sha512-uOj9C1++KO/GY58nW0CjDiUjLKWQG4yB/NJMj3PtJNmFA52Hg56lojRtvBpLgQyVByUD+1M3M/1tKdoGDKUBAQ=='
+        crossorigin='anonymous'></script>
+    <script>
+        let flag = 0;
+        const html5QrCode = new Html5Qrcode("reader");
+        Html5Qrcode.getCameras().then(devices => {
+            /**
+             * devices would be an array of objects of type:
+             * { id: "id", label: "label" }
+             */
+            if (devices && devices.length) {
+                var cameraId = devices[0].id;
+                // .. use this to start scanning.
+                const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                    /* handle success */
+                };
+                html5QrCode.start(
+                    cameraId,
+                    {
+                        fps: 10,    // Optional frame per seconds for qr code scanning
+                        qrbox: 250  // Optional if you want bounded box UI
+                    },
+                    qrCodeMessage => {
+                        if (flag == 0) {
+                            console.log(qrCodeMessage);
+                            flag++;
+                        }
+                    },
+                    errorMessage => {
+                        // parse error, ignore it.
+                    })
+                    .catch(err => {
+                        // Start failed, handle it.
+                    });
+            }
+        }).catch(err => {
+            // handle err
+        });
+
+    </script>
+</body>
+
+</html>
