@@ -102,6 +102,7 @@
                     qrCodeMessage => {
                         if (flag == 0) {
                             console.log(qrCodeMessage);
+                            document.location.href = qrCodeMessage;
                             flag++;
                         }
                     },
