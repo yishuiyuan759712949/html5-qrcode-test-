@@ -7,41 +7,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .readerWrap {
-            position: relative;
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
             overflow: hidden;
         }
+        .header {
+            height: 20.6667vw;
+            line-height: 20.6667vw;
+            background-color: #ff9933;
+            text-align: centerz;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 13.3333vw;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .readerWrap {
+            position: relative;
+        }
+
         .effects {
-            position: fixed;
-            top: 0;
+            position: absolute;
+            top: 100%;
             left: 0;
+            z-index: 99;
             width: 100%;
-            height: 75vw;
-            background: linear-gradient(to bottom, #fff 0%,#fff 5%, transparent 120%);;
+            height: 100%;
+            background: linear-gradient(to bottom, #fff 0%, #fff 5%, transparent 120%);
+            ;
             animation-name: animate;
             animation-duration: 2s;
-            animation-iteration-count:infinite;
-            animation-timing-function : linear;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
             opacity: .5;
         }
+
         @keyframes animate {
             0% {
                 top: 0;
-                height: 75vw;
+                height: 100%;
             }
+
             50% {
-                top: 75vw;
+                top: 100%;
                 height: 0vw;
             }
+
             100% {
                 top: 0;
-                height: 75vw;
+                height: 100%;
             }
         }
     </style>
 </head>
 
 <body>
+    <header class="header">
+        <h1>掃描二維碼</h1>
+    </header>
     <div class="readerWrap">
         <div id="reader"></div>
         <div class="effects"></div>
